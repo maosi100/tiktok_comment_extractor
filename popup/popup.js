@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   chrome.runtime.sendMessage({ type: "POPUP_STATUS_REQUEST" }, (response) => {
-    // Check for runtime.lastError is crucial for message reliability
     if (chrome.runtime.lastError) {
       console.error("Popup: Error sending message:", chrome.runtime.lastError);
       if (statusDisplay) {
@@ -18,7 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     console.log("Popup: Received response:", response);
     if (statusDisplay) {
-      statusDisplay.textContent = response.status + " (User logged in: " + response.userLoggedIn + ")";
+      let message = response.status + " (User logged in: " + response.userLoggedIn + ")";
+      if (response.lastUrlAvailable) {
+        message += " - A TikTok URL has been captured!";
+      } else {
+        message += " - Open a TikTok video and scroll to capture its comments API URL.";
+      }
+      statusDisplay.textContent = message;
     }
   });
 });
