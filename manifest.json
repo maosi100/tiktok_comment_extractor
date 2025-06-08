@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "TikTok Comment Extractor Prototype",
+  "version": "0.1.0",
+  "description": "A basic Chrome Extension prototype to extract TikTok comments.",
+  "author": "Your Name/Team Name",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "images/icon.png",
+      "48": "images/icon.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "scripts/contentScript.js"
+      ],
+      "run_at": "document_end"
+      // Removed "css": ["libs/style.css"] as requested for simplicity
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "injected.js"
+      ],
+      "matches": [
+        "*://*.tiktok.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "*://*.tiktok.com/*",
+    "*://*.extensionsbox.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
