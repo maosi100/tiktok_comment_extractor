@@ -215,9 +215,8 @@ cd tiktok_comment_extractor
 
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under GNU GPL 3.0
 
 ## Disclaimer
 
 This extension is for educational and research purposes. Please respect TikTok's Terms of Service and use responsibly. The extension may break if TikTok changes their API structure.
-
